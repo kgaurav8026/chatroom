@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/SocketClient.dir/client.c.o CMakeFiles/SocketClient.dir/socketutil.c.o -o SocketClient 

@@ -8,9 +8,8 @@
 #include <string.h>
 #include <malloc.h>
 
-
-int createTCPIpv4Socket();
 struct sockaddr_in* createIPv4Address(char* ip , int port);
 
+int createTCPIpv4Socket();
 
 #endif 
