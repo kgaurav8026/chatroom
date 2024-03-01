@@ -117,6 +117,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named SocketServer
+
+# Build rule for target.
+SocketServer: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 SocketServer
+.PHONY : SocketServer
+
+# fast build rule for target.
+SocketServer/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/build
+.PHONY : SocketServer/fast
+
+#=============================================================================
 # Target rules for targets named SocketClient
 
 # Build rule for target.
@@ -153,11 +166,36 @@ client.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketClient.dir/build.make CMakeFiles/SocketClient.dir/client.c.s
 .PHONY : client.c.s
 
+server.o: server.c.o
+.PHONY : server.o
+
+# target to build an object file
+server.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/server.c.o
+.PHONY : server.c.o
+
+server.i: server.c.i
+.PHONY : server.i
+
+# target to preprocess a source file
+server.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/server.c.i
+.PHONY : server.c.i
+
+server.s: server.c.s
+.PHONY : server.s
+
+# target to generate assembly for a file
+server.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/server.c.s
+.PHONY : server.c.s
+
 socketutil.o: socketutil.c.o
 .PHONY : socketutil.o
 
 # target to build an object file
 socketutil.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/socketutil.c.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketClient.dir/build.make CMakeFiles/SocketClient.dir/socketutil.c.o
 .PHONY : socketutil.c.o
 
@@ -166,6 +204,7 @@ socketutil.i: socketutil.c.i
 
 # target to preprocess a source file
 socketutil.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/socketutil.c.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketClient.dir/build.make CMakeFiles/SocketClient.dir/socketutil.c.i
 .PHONY : socketutil.c.i
 
@@ -174,6 +213,7 @@ socketutil.s: socketutil.c.s
 
 # target to generate assembly for a file
 socketutil.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/socketutil.c.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketClient.dir/build.make CMakeFiles/SocketClient.dir/socketutil.c.s
 .PHONY : socketutil.c.s
 
@@ -186,9 +226,13 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... SocketClient"
+	@echo "... SocketServer"
 	@echo "... client.o"
 	@echo "... client.i"
 	@echo "... client.s"
+	@echo "... server.o"
+	@echo "... server.i"
+	@echo "... server.s"
 	@echo "... socketutil.o"
 	@echo "... socketutil.i"
 	@echo "... socketutil.s"

@@ -1,13 +1,13 @@
+#include <stdbool.h>
 #include "socketutil.h"
+
 
 int main() {
     int socketFD = createTCPIpv4Socket();  
 
-    struct sockaddr_in* address = createIPv4Address("142.250.188.46",80);
+    struct sockaddr_in* address = createIPv4Address("127.0.0.0",2000);
 
     int result = connect(socketFD, (struct sockaddr*)address, sizeof(struct sockaddr_in));
-
-
 
     if (result == 0)
         printf("Connection was successful\n");
@@ -16,15 +16,22 @@ int main() {
         return 1;
     }
 
-    char* message = "GET / HTTP/1.1\r\nHost: google.com\r\n\r\n";
-    send(socketFD, message, strlen(message), 0);
+    char *line = NULL;
+    size_t lineSize = 0;
 
-    char buffer[1024];
-    recv(socketFD, buffer, sizeof(buffer), 0);
+   
+    printf("type and we will send(type exit)..\n");
+    while(true){
+        ssize_t charCount = getline(&line, &lineSize, stdin);
+       
+        if(charCount>0){
+            if(strcmp(line,"exit\n") == 0)
+                break;
+             ssize_t amountWasSend = send(socketFD, line, charCount, 0);
 
-    printf("Response was: %s\n", buffer);
+        }
 
-    printf("\n\n");
-
+    }
+    close(socketFD);
     return 0;
 }

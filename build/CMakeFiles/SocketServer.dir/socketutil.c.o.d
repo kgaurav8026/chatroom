@@ -1,7 +1,6 @@
-CMakeFiles/SocketClient.dir/client.c.o: \
- /home/kgaurav/Desktop/projects/chatroom-c/client.c \
+CMakeFiles/SocketServer.dir/socketutil.c.o: \
+ /home/kgaurav/Desktop/projects/chatroom-c/socketutil.c \
  /usr/include/stdc-predef.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
  /home/kgaurav/Desktop/projects/chatroom-c/socketutil.h \
  /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \

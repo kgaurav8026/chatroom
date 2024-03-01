@@ -1,5 +1,5 @@
-CMakeFiles/SocketClient.dir/client.c.o: \
- /home/kgaurav/Desktop/projects/chatroom-c/client.c \
+CMakeFiles/SocketServer.dir/server.c.o: \
+ /home/kgaurav/Desktop/projects/chatroom-c/server.c \
  /usr/include/stdc-predef.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
  /home/kgaurav/Desktop/projects/chatroom-c/socketutil.h \
