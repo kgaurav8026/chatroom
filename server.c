@@ -1,97 +1,120 @@
+#include "socketutil.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <arpa/inet.h>
+#include <stdbool.h>
 #include <pthread.h>
+#include <stdlib.h>
 
-#define MAX_CLIENTS 10
+struct AcceptedSocket {
+    int acceptedSocketFD;
+    int error;
+    bool acceptedSuccessfully;
+};
 
-// Colors for client names
-const char *colors[] = {"\033[31m", "\033[32m", "\033[33m", "\033[34m", "\033[35m"};
+struct AcceptedSocket acceptedSockets[10];
+int acceptedSocketCount = 0;
 
-void *handleClient(void *arg) {
-    int clientSocketFD = *(int *)arg;
-    free(arg);
+void receiveAndPrintIncomingDataOnSeparateThread(struct AcceptedSocket *pSocket);
+void freeAcceptedSocket(struct AcceptedSocket *pSocket);
+static void *receiveAndPrintIncomingDataWrapper(void *arg);
+void receiveAndPrintIncomingData(int socketFD);
+void sendReceivedMessageToTheOtherClients(char *buffer, int senderSocketFD);
 
-    // Receive client name
-    char clientName[100];
-    ssize_t nameLen = recv(clientSocketFD, clientName, sizeof(clientName) - 1, 0);
-    if (nameLen > 0) {
-        clientName[nameLen] = 0;
-        printf("Client connected: %s%s\033[0m\n", colors[clientSocketFD % 5], clientName);
+struct AcceptedSocket *acceptIncomingConnection(int serverSocketFD) {
+    struct sockaddr_in clientAddress;
+    int clientAddressSize = sizeof(struct sockaddr_in);
+    int clientSocketFD = accept(serverSocketFD, (struct sockaddr *)&clientAddress, &clientAddressSize);
+
+    struct AcceptedSocket *acceptedSocket = malloc(sizeof(struct AcceptedSocket));
+    acceptedSocket->acceptedSocketFD = clientSocketFD;
+    acceptedSocket->acceptedSuccessfully = clientSocketFD > 0;
+
+    if (!acceptedSocket->acceptedSuccessfully) {
+        acceptedSocket->error = clientSocketFD;
     }
 
-    char buffer[1024];
-    while (1) {
-        ssize_t amountReceived = recv(clientSocketFD, buffer, sizeof(buffer), 0);
-        if (amountReceived > 0) {
-            buffer[amountReceived] = 0;
-            printf("%s%s: %s\033[0m", colors[clientSocketFD % 5], clientName, buffer);
-        } else if (amountReceived == 0) {
-            printf("Client disconnected: %s%s\033[0m\n", colors[clientSocketFD % 5], clientName);
-            break;
+    return acceptedSocket;
+}
+
+void startAcceptingIncomingConnections(int serverSocketFD) {
+    while (true) {
+        struct AcceptedSocket *clientSocket = acceptIncomingConnection(serverSocketFD);
+
+        if (clientSocket->acceptedSuccessfully) {
+            acceptedSockets[acceptedSocketCount++] = *clientSocket;
+            receiveAndPrintIncomingDataOnSeparateThread(clientSocket);
+            freeAcceptedSocket(clientSocket);
         } else {
-            perror("Error receiving data");
-            break;
+            // Handle error condition
+            freeAcceptedSocket(clientSocket);
         }
-    }
 
-    close(clientSocketFD);
+        // Add a condition to break out of the loop if needed
+        // For example, you could check for a specific signal or user input
+    }
+}
+
+static void *receiveAndPrintIncomingDataWrapper(void *arg) {
+    int *socketFD = (int *)arg;
+    receiveAndPrintIncomingData(*socketFD);
+    free(arg);
+    pthread_exit(NULL);
     return NULL;
 }
 
-int main() {
-    int serverSocketFD = socket(AF_INET, SOCK_STREAM, 0);
-    if (serverSocketFD == -1) {
-        perror("Failed to create socket");
-        exit(EXIT_FAILURE);
-    }
+void receiveAndPrintIncomingDataOnSeparateThread(struct AcceptedSocket *pSocket) {
+    pthread_t id;
+    int *socketFD = malloc(sizeof(int));
+    *socketFD = pSocket->acceptedSocketFD;
+    pthread_create(&id, NULL, receiveAndPrintIncomingDataWrapper, socketFD);
+    pthread_detach(id);
+}
 
-    struct sockaddr_in serverAddress;
-    memset(&serverAddress, 0, sizeof(serverAddress));
-    serverAddress.sin_family = AF_INET;
-    serverAddress.sin_addr.s_addr = INADDR_ANY;
-    serverAddress.sin_port = htons(2000);
-
-    int result = bind(serverSocketFD, (const struct sockaddr *)&serverAddress, sizeof(serverAddress));
-    if (result == -1) {
-        perror("Failed to bind socket");
-        exit(EXIT_FAILURE);
-    }
-
-    if (listen(serverSocketFD, MAX_CLIENTS) == -1) {
-        perror("Failed to listen");
-        exit(EXIT_FAILURE);
-    }
-
-    printf("Server is listening on port 2000...\n");
-
+void receiveAndPrintIncomingData(int socketFD) {
+    char buffer[1024];
     while (1) {
-        struct sockaddr_in clientAddress;
-        socklen_t clientAddressSize = sizeof(clientAddress);
-        int *clientSocketFD = malloc(sizeof(int));
-        *clientSocketFD = accept(serverSocketFD, (struct sockaddr *)&clientAddress, &clientAddressSize);
-        if (*clientSocketFD == -1) {
-            perror("Failed to accept connection");
-            exit(EXIT_FAILURE);
+        ssize_t amountReceived = recv(socketFD, buffer, 1024, 0);
+
+        if (amountReceived > 0) {
+            buffer[amountReceived] = 0;
+            printf("%s\n", buffer);
+            sendReceivedMessageToTheOtherClients(buffer, socketFD);
         }
 
-        printf("Client connected\n");
-
-        pthread_t thread;
-        if (pthread_create(&thread, NULL, handleClient, clientSocketFD) != 0) {
-            perror("Failed to create thread");
-            close(*clientSocketFD);
-            free(clientSocketFD);
-        } else {
-            pthread_detach(thread);
-        }
+        if (amountReceived == 0)
+            break;
     }
 
-    close(serverSocketFD);
+    close(socketFD);
+}
+
+void sendReceivedMessageToTheOtherClients(char *buffer, int senderSocketFD) {
+    for (int i = 0; i < acceptedSocketCount; i++) {
+        int recipientSocketFD = acceptedSockets[i].acceptedSocketFD;
+        if (recipientSocketFD != senderSocketFD) {
+            send(recipientSocketFD, buffer, strlen(buffer), 0);
+        }
+    }
+}
+
+void freeAcceptedSocket(struct AcceptedSocket *pSocket) {
+    free(pSocket);
+}
+
+int main() {
+    int serverSocketFD = createTCPIpv4Socket();
+    struct sockaddr_in *serverAddress = createIPv4Address("", 2000);
+    int result = bind(serverSocketFD, (struct sockaddr *)serverAddress, sizeof(struct sockaddr_in));
+
+    if (result == 0) {
+        printf("Socket was bound successfully\n");
+    }
+
+    int listenResult = listen(serverSocketFD, 10);
+
+    startAcceptingIncomingConnections(serverSocketFD);
+
+    shutdown(serverSocketFD, SHUT_RDWR);
 
     return 0;
 }

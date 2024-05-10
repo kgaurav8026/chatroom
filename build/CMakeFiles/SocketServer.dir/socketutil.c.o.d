@@ -1,7 +1,7 @@
 CMakeFiles/SocketServer.dir/socketutil.c.o: \
- /home/kgaurav/Desktop/projects/chatroom-c/socketutil.c \
+ /home/kgaurav/Desktop/projects/group-chat/socketutil.c \
  /usr/include/stdc-predef.h \
- /home/kgaurav/Desktop/projects/chatroom-c/socketutil.h \
+ /home/kgaurav/Desktop/projects/group-chat/socketutil.h \
  /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \

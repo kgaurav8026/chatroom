@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = -I/home/kgaurav/Desktop/projects/chatroom-c
+C_INCLUDES = -I/home/kgaurav/Desktop/projects/group-chat
 
 C_FLAGS = 
 
