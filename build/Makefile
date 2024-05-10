@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kgaurav/Desktop/projects/group-chat
+CMAKE_SOURCE_DIR = /home/kgaurav/Desktop/chatroom
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kgaurav/Desktop/projects/group-chat/build
+CMAKE_BINARY_DIR = /home/kgaurav/Desktop/chatroom/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kgaurav/Desktop/projects/group-chat/build/CMakeFiles /home/kgaurav/Desktop/projects/group-chat/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kgaurav/Desktop/chatroom/build/CMakeFiles /home/kgaurav/Desktop/chatroom/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kgaurav/Desktop/projects/group-chat/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kgaurav/Desktop/chatroom/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -142,80 +142,80 @@ SocketClient/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketClient.dir/build.make CMakeFiles/SocketClient.dir/build
 .PHONY : SocketClient/fast
 
-client.o: client.c.o
+client.o: client.cpp.o
 .PHONY : client.o
 
 # target to build an object file
-client.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketClient.dir/build.make CMakeFiles/SocketClient.dir/client.c.o
-.PHONY : client.c.o
+client.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketClient.dir/build.make CMakeFiles/SocketClient.dir/client.cpp.o
+.PHONY : client.cpp.o
 
-client.i: client.c.i
+client.i: client.cpp.i
 .PHONY : client.i
 
 # target to preprocess a source file
-client.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketClient.dir/build.make CMakeFiles/SocketClient.dir/client.c.i
-.PHONY : client.c.i
+client.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketClient.dir/build.make CMakeFiles/SocketClient.dir/client.cpp.i
+.PHONY : client.cpp.i
 
-client.s: client.c.s
+client.s: client.cpp.s
 .PHONY : client.s
 
 # target to generate assembly for a file
-client.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketClient.dir/build.make CMakeFiles/SocketClient.dir/client.c.s
-.PHONY : client.c.s
+client.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketClient.dir/build.make CMakeFiles/SocketClient.dir/client.cpp.s
+.PHONY : client.cpp.s
 
-server.o: server.c.o
+server.o: server.cpp.o
 .PHONY : server.o
 
 # target to build an object file
-server.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/server.c.o
-.PHONY : server.c.o
+server.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/server.cpp.o
+.PHONY : server.cpp.o
 
-server.i: server.c.i
+server.i: server.cpp.i
 .PHONY : server.i
 
 # target to preprocess a source file
-server.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/server.c.i
-.PHONY : server.c.i
+server.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/server.cpp.i
+.PHONY : server.cpp.i
 
-server.s: server.c.s
+server.s: server.cpp.s
 .PHONY : server.s
 
 # target to generate assembly for a file
-server.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/server.c.s
-.PHONY : server.c.s
+server.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/server.cpp.s
+.PHONY : server.cpp.s
 
-socketutil.o: socketutil.c.o
+socketutil.o: socketutil.cpp.o
 .PHONY : socketutil.o
 
 # target to build an object file
-socketutil.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/socketutil.c.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketClient.dir/build.make CMakeFiles/SocketClient.dir/socketutil.c.o
-.PHONY : socketutil.c.o
+socketutil.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/socketutil.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketClient.dir/build.make CMakeFiles/SocketClient.dir/socketutil.cpp.o
+.PHONY : socketutil.cpp.o
 
-socketutil.i: socketutil.c.i
+socketutil.i: socketutil.cpp.i
 .PHONY : socketutil.i
 
 # target to preprocess a source file
-socketutil.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/socketutil.c.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketClient.dir/build.make CMakeFiles/SocketClient.dir/socketutil.c.i
-.PHONY : socketutil.c.i
+socketutil.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/socketutil.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketClient.dir/build.make CMakeFiles/SocketClient.dir/socketutil.cpp.i
+.PHONY : socketutil.cpp.i
 
-socketutil.s: socketutil.c.s
+socketutil.s: socketutil.cpp.s
 .PHONY : socketutil.s
 
 # target to generate assembly for a file
-socketutil.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/socketutil.c.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketClient.dir/build.make CMakeFiles/SocketClient.dir/socketutil.c.s
-.PHONY : socketutil.c.s
+socketutil.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/socketutil.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketClient.dir/build.make CMakeFiles/SocketClient.dir/socketutil.cpp.s
+.PHONY : socketutil.cpp.s
 
 # Help Target
 help:

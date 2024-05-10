@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kgaurav/Desktop/projects/group-chat
+CMAKE_SOURCE_DIR = /home/kgaurav/Desktop/chatroom
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kgaurav/Desktop/projects/group-chat/build
+CMAKE_BINARY_DIR = /home/kgaurav/Desktop/chatroom/build
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -83,14 +83,14 @@ clean: CMakeFiles/SocketClient.dir/clean
 CMakeFiles/SocketServer.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketServer.dir/build.make CMakeFiles/SocketServer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/kgaurav/Desktop/projects/group-chat/build/CMakeFiles --progress-num=4,5,6 "Built target SocketServer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/kgaurav/Desktop/chatroom/build/CMakeFiles --progress-num=4,5,6 "Built target SocketServer"
 .PHONY : CMakeFiles/SocketServer.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/SocketServer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kgaurav/Desktop/projects/group-chat/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kgaurav/Desktop/chatroom/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/SocketServer.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kgaurav/Desktop/projects/group-chat/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kgaurav/Desktop/chatroom/build/CMakeFiles 0
 .PHONY : CMakeFiles/SocketServer.dir/rule
 
 # Convenience name for target.
@@ -109,14 +109,14 @@ CMakeFiles/SocketServer.dir/clean:
 CMakeFiles/SocketClient.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketClient.dir/build.make CMakeFiles/SocketClient.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/SocketClient.dir/build.make CMakeFiles/SocketClient.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/kgaurav/Desktop/projects/group-chat/build/CMakeFiles --progress-num=1,2,3 "Built target SocketClient"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/kgaurav/Desktop/chatroom/build/CMakeFiles --progress-num=1,2,3 "Built target SocketClient"
 .PHONY : CMakeFiles/SocketClient.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/SocketClient.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kgaurav/Desktop/projects/group-chat/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kgaurav/Desktop/chatroom/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/SocketClient.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kgaurav/Desktop/projects/group-chat/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kgaurav/Desktop/chatroom/build/CMakeFiles 0
 .PHONY : CMakeFiles/SocketClient.dir/rule
 
 # Convenience name for target.

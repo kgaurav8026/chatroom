@@ -1,1 +1,1 @@
-/usr/bin/cc CMakeFiles/SocketServer.dir/server.c.o CMakeFiles/SocketServer.dir/socketutil.c.o -o SocketServer 
+/usr/bin/c++ CMakeFiles/SocketServer.dir/server.cpp.o CMakeFiles/SocketServer.dir/socketutil.cpp.o -o SocketServer 
