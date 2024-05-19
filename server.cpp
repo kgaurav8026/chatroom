@@ -1,8 +1,12 @@
 #include "socketutil.h"
+
 #include <iostream>
 #include <unistd.h>
 #include <pthread.h>
 #include <cstdlib>
+#include <vector>
+#include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -15,11 +19,19 @@ struct AcceptedSocket {
 AcceptedSocket acceptedSockets[10];
 int acceptedSocketCount = 0;
 
+struct ClientInfo {
+    int socketFD;
+    string name;
+};
+
+vector<ClientInfo> activeClients;
+
 void receiveAndPrintIncomingDataOnSeparateThread(AcceptedSocket* pSocket);
 void freeAcceptedSocket(AcceptedSocket* pSocket);
 static void* _receiveAndPrintIncomingDataWrapper(void* arg);
 void receiveAndPrintIncomingData(int socketFD);
 void sendReceivedMessageToTheOtherClients(char* buffer, int senderSocketFD);
+void removeClientFromActiveClients(int socketFD);
 
 AcceptedSocket* acceptIncomingConnection(int serverSocketFD) {
     struct sockaddr_in clientAddress;
@@ -29,8 +41,19 @@ AcceptedSocket* acceptIncomingConnection(int serverSocketFD) {
     AcceptedSocket* acceptedSocket = new AcceptedSocket();
     acceptedSocket->acceptedSocketFD = clientSocketFD;
     acceptedSocket->acceptedSuccessfully = clientSocketFD > 0;
+
     if (!acceptedSocket->acceptedSuccessfully) {
         acceptedSocket->error = clientSocketFD;
+    }
+    else {
+        // Prompt the new client for their name
+        char name[256];
+        ssize_t bytesReceived = recv(clientSocketFD, name, sizeof(name) - 1, 0);
+        if (bytesReceived > 0) {
+            name[bytesReceived] = '\0';
+            ClientInfo newClient = { clientSocketFD, string(name) };
+            activeClients.push_back(newClient);
+        }
     }
 
     return acceptedSocket;
@@ -77,18 +100,41 @@ void receiveAndPrintIncomingData(int socketFD) {
             cout << buffer << endl;
             sendReceivedMessageToTheOtherClients(buffer, socketFD);
         }
-        if (amountReceived == 0)
+        if (amountReceived == 0) {
+            removeClientFromActiveClients(socketFD);
             break;
+        }
     }
     close(socketFD);
 }
 
 void sendReceivedMessageToTheOtherClients(char* buffer, int senderSocketFD) {
-    for (int i = 0; i < acceptedSocketCount; i++) {
-        int recipientSocketFD = acceptedSockets[i].acceptedSocketFD;
-        if (recipientSocketFD != senderSocketFD) {
-            send(recipientSocketFD, buffer, strlen(buffer), 0);
+    string message(buffer);
+    if (message == "showmembers") {
+        string memberList = "Active members:\n";
+        for (const auto& client : activeClients) {
+            memberList += client.name + "\n";
         }
+        send(senderSocketFD, memberList.c_str(), memberList.length(), 0);
+    } else if (message.find("exit") != string::npos) {
+        removeClientFromActiveClients(senderSocketFD);
+    } else {
+        for (int i = 0; i < acceptedSocketCount; i++) {
+            int recipientSocketFD = acceptedSockets[i].acceptedSocketFD;
+            if (recipientSocketFD != senderSocketFD) {
+                send(recipientSocketFD, buffer, strlen(buffer), 0);
+            }
+        }
+    }
+}
+
+void removeClientFromActiveClients(int socketFD) {
+    auto it = find_if(activeClients.begin(), activeClients.end(), [&](const ClientInfo& client) {
+        return client.socketFD == socketFD;
+    });
+
+    if (it != activeClients.end()) {
+        activeClients.erase(it);
     }
 }
 
@@ -98,7 +144,7 @@ void freeAcceptedSocket(AcceptedSocket* pSocket) {
 
 int main() {
     int serverSocketFD = createTCPIpv4Socket();
-    char ip[] = ""; 
+    char ip[] = "";
     struct sockaddr_in* serverAddress = createIPv4Address(ip, 2000);
     int result = bind(serverSocketFD, (struct sockaddr*)serverAddress, sizeof(struct sockaddr_in));
 

@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/kgaurav/Desktop/chatroom/server.cpp" "CMakeFiles/SocketServer.dir/server.cpp.o" "gcc" "CMakeFiles/SocketServer.dir/server.cpp.o.d"
-  "/home/kgaurav/Desktop/chatroom/socketutil.cpp" "CMakeFiles/SocketServer.dir/socketutil.cpp.o" "gcc" "CMakeFiles/SocketServer.dir/socketutil.cpp.o.d"
+  "/home/kgaurav/Desktop/projects/chatroom/server.cpp" "CMakeFiles/SocketServer.dir/server.cpp.o" "gcc" "CMakeFiles/SocketServer.dir/server.cpp.o.d"
+  "/home/kgaurav/Desktop/projects/chatroom/socketutil.cpp" "CMakeFiles/SocketServer.dir/socketutil.cpp.o" "gcc" "CMakeFiles/SocketServer.dir/socketutil.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

@@ -1,6 +1,7 @@
 CMakeFiles/SocketServer.dir/socketutil.cpp.o: \
- /home/kgaurav/Desktop/chatroom/socketutil.cpp /usr/include/stdc-predef.h \
- /home/kgaurav/Desktop/chatroom/socketutil.h \
+ /home/kgaurav/Desktop/projects/chatroom/socketutil.cpp \
+ /usr/include/stdc-predef.h \
+ /home/kgaurav/Desktop/projects/chatroom/socketutil.h \
  /usr/include/x86_64-linux-gnu/sys/socket.h /usr/include/features.h \
  /usr/include/features-time64.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \

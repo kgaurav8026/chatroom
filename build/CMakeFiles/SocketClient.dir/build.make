@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/kgaurav/Desktop/chatroom
+CMAKE_SOURCE_DIR = /home/kgaurav/Desktop/projects/chatroom
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/kgaurav/Desktop/chatroom/build
+CMAKE_BINARY_DIR = /home/kgaurav/Desktop/projects/chatroom/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/SocketClient.dir/depend.make
@@ -70,32 +70,32 @@ include CMakeFiles/SocketClient.dir/progress.make
 include CMakeFiles/SocketClient.dir/flags.make
 
 CMakeFiles/SocketClient.dir/client.cpp.o: CMakeFiles/SocketClient.dir/flags.make
-CMakeFiles/SocketClient.dir/client.cpp.o: /home/kgaurav/Desktop/chatroom/client.cpp
+CMakeFiles/SocketClient.dir/client.cpp.o: /home/kgaurav/Desktop/projects/chatroom/client.cpp
 CMakeFiles/SocketClient.dir/client.cpp.o: CMakeFiles/SocketClient.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kgaurav/Desktop/chatroom/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SocketClient.dir/client.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SocketClient.dir/client.cpp.o -MF CMakeFiles/SocketClient.dir/client.cpp.o.d -o CMakeFiles/SocketClient.dir/client.cpp.o -c /home/kgaurav/Desktop/chatroom/client.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kgaurav/Desktop/projects/chatroom/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SocketClient.dir/client.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SocketClient.dir/client.cpp.o -MF CMakeFiles/SocketClient.dir/client.cpp.o.d -o CMakeFiles/SocketClient.dir/client.cpp.o -c /home/kgaurav/Desktop/projects/chatroom/client.cpp
 
 CMakeFiles/SocketClient.dir/client.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SocketClient.dir/client.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kgaurav/Desktop/chatroom/client.cpp > CMakeFiles/SocketClient.dir/client.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kgaurav/Desktop/projects/chatroom/client.cpp > CMakeFiles/SocketClient.dir/client.cpp.i
 
 CMakeFiles/SocketClient.dir/client.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SocketClient.dir/client.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kgaurav/Desktop/chatroom/client.cpp -o CMakeFiles/SocketClient.dir/client.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kgaurav/Desktop/projects/chatroom/client.cpp -o CMakeFiles/SocketClient.dir/client.cpp.s
 
 CMakeFiles/SocketClient.dir/socketutil.cpp.o: CMakeFiles/SocketClient.dir/flags.make
-CMakeFiles/SocketClient.dir/socketutil.cpp.o: /home/kgaurav/Desktop/chatroom/socketutil.cpp
+CMakeFiles/SocketClient.dir/socketutil.cpp.o: /home/kgaurav/Desktop/projects/chatroom/socketutil.cpp
 CMakeFiles/SocketClient.dir/socketutil.cpp.o: CMakeFiles/SocketClient.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kgaurav/Desktop/chatroom/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/SocketClient.dir/socketutil.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SocketClient.dir/socketutil.cpp.o -MF CMakeFiles/SocketClient.dir/socketutil.cpp.o.d -o CMakeFiles/SocketClient.dir/socketutil.cpp.o -c /home/kgaurav/Desktop/chatroom/socketutil.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kgaurav/Desktop/projects/chatroom/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/SocketClient.dir/socketutil.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/SocketClient.dir/socketutil.cpp.o -MF CMakeFiles/SocketClient.dir/socketutil.cpp.o.d -o CMakeFiles/SocketClient.dir/socketutil.cpp.o -c /home/kgaurav/Desktop/projects/chatroom/socketutil.cpp
 
 CMakeFiles/SocketClient.dir/socketutil.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/SocketClient.dir/socketutil.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kgaurav/Desktop/chatroom/socketutil.cpp > CMakeFiles/SocketClient.dir/socketutil.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kgaurav/Desktop/projects/chatroom/socketutil.cpp > CMakeFiles/SocketClient.dir/socketutil.cpp.i
 
 CMakeFiles/SocketClient.dir/socketutil.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/SocketClient.dir/socketutil.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kgaurav/Desktop/chatroom/socketutil.cpp -o CMakeFiles/SocketClient.dir/socketutil.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kgaurav/Desktop/projects/chatroom/socketutil.cpp -o CMakeFiles/SocketClient.dir/socketutil.cpp.s
 
 # Object files for target SocketClient
 SocketClient_OBJECTS = \
@@ -109,7 +109,7 @@ SocketClient: CMakeFiles/SocketClient.dir/client.cpp.o
 SocketClient: CMakeFiles/SocketClient.dir/socketutil.cpp.o
 SocketClient: CMakeFiles/SocketClient.dir/build.make
 SocketClient: CMakeFiles/SocketClient.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kgaurav/Desktop/chatroom/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable SocketClient"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kgaurav/Desktop/projects/chatroom/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable SocketClient"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SocketClient.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -121,6 +121,6 @@ CMakeFiles/SocketClient.dir/clean:
 .PHONY : CMakeFiles/SocketClient.dir/clean
 
 CMakeFiles/SocketClient.dir/depend:
-	cd /home/kgaurav/Desktop/chatroom/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/kgaurav/Desktop/chatroom /home/kgaurav/Desktop/chatroom /home/kgaurav/Desktop/chatroom/build /home/kgaurav/Desktop/chatroom/build /home/kgaurav/Desktop/chatroom/build/CMakeFiles/SocketClient.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/kgaurav/Desktop/projects/chatroom/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/kgaurav/Desktop/projects/chatroom /home/kgaurav/Desktop/projects/chatroom /home/kgaurav/Desktop/projects/chatroom/build /home/kgaurav/Desktop/projects/chatroom/build /home/kgaurav/Desktop/projects/chatroom/build/CMakeFiles/SocketClient.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/SocketClient.dir/depend
 

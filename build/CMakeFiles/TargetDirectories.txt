@@ -1,4 +1,4 @@
-/home/kgaurav/Desktop/chatroom/build/CMakeFiles/SocketServer.dir
-/home/kgaurav/Desktop/chatroom/build/CMakeFiles/SocketClient.dir
-/home/kgaurav/Desktop/chatroom/build/CMakeFiles/edit_cache.dir
-/home/kgaurav/Desktop/chatroom/build/CMakeFiles/rebuild_cache.dir
+/home/kgaurav/Desktop/projects/chatroom/build/CMakeFiles/SocketServer.dir
+/home/kgaurav/Desktop/projects/chatroom/build/CMakeFiles/SocketClient.dir
+/home/kgaurav/Desktop/projects/chatroom/build/CMakeFiles/edit_cache.dir
+/home/kgaurav/Desktop/projects/chatroom/build/CMakeFiles/rebuild_cache.dir
