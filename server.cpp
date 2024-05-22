@@ -46,7 +46,7 @@ AcceptedSocket* acceptIncomingConnection(int serverSocketFD) {
         acceptedSocket->error = clientSocketFD;
     }
     else {
-        // Prompt the new client for their name
+       
         char name[256];
         ssize_t bytesReceived = recv(clientSocketFD, name, sizeof(name) - 1, 0);
         if (bytesReceived > 0) {
@@ -108,6 +108,37 @@ void receiveAndPrintIncomingData(int socketFD) {
     close(socketFD);
 }
 
+void sendPrivateMessage(char* buffer, int senderSocketFD, string recipientName) {
+    string message(buffer);
+    transform(recipientName.begin(), recipientName.end(), recipientName.begin(), ::tolower); 
+
+    ClientInfo* senderClient = nullptr;
+    for (auto& client : activeClients) {
+        if (client.socketFD == senderSocketFD) {
+            senderClient = &client;
+            break;
+        }
+    }
+
+    if (senderClient != nullptr) {
+        string senderName = senderClient->name;
+        string privateMessage = "Private message from " + senderName + ": " + message;
+
+        for (const auto& client : activeClients) {
+            string lowercaseName = client.name;
+            transform(lowercaseName.begin(), lowercaseName.end(), lowercaseName.begin(), ::tolower);
+
+            if (lowercaseName == recipientName) {
+                send(client.socketFD, privateMessage.c_str(), privateMessage.length(), 0);
+                return;
+            }
+        }
+    }
+
+    
+    string errorMessage = "Error: Recipient '" + recipientName + "' not found.";
+    send(senderSocketFD, errorMessage.c_str(), errorMessage.length(), 0);
+}
 void sendReceivedMessageToTheOtherClients(char* buffer, int senderSocketFD) {
     string message(buffer);
     if (message == "showmembers") {
@@ -118,7 +149,19 @@ void sendReceivedMessageToTheOtherClients(char* buffer, int senderSocketFD) {
         send(senderSocketFD, memberList.c_str(), memberList.length(), 0);
     } else if (message.find("exit") != string::npos) {
         removeClientFromActiveClients(senderSocketFD);
-    } else {
+    } else if (message.find("/pm ") == 0) { 
+        size_t recipientNameEnd = message.find(' ', 4);
+        if (recipientNameEnd != string::npos) {
+            string recipientName = message.substr(4, recipientNameEnd - 4); 
+            string privateMessage = message.substr(recipientNameEnd + 1); 
+            sendPrivateMessage(const_cast<char*>(privateMessage.c_str()), senderSocketFD, recipientName);
+        } else {
+            string errorMessage = "Error: Invalid private message format. Usage: /pm <recipient> <message>";
+            send(senderSocketFD, errorMessage.c_str(), errorMessage.length(), 0);
+        }
+    }
+    
+     else {
         for (int i = 0; i < acceptedSocketCount; i++) {
             int recipientSocketFD = acceptedSockets[i].acceptedSocketFD;
             if (recipientSocketFD != senderSocketFD) {

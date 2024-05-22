@@ -22,18 +22,19 @@ void startListeningAndPrintMessagesOnNewThread(int socketFD) {
 void* _listenAndPrint(void* arg) {
     int socketFD = *(int*)arg;
     delete (int*)arg;
+    char buffer[2048];
 
-    char buffer[2048];  // Increased buffer size
     while (true) {
         ssize_t amountReceived = recv(socketFD, buffer, sizeof(buffer) - 1, 0);
         if (amountReceived > 0) {
             buffer[amountReceived] = 0;
             cout << buffer << endl;
-            cout.flush();  // Flush output stream
+            cout.flush();
         }
         if (amountReceived == 0)
             break;
     }
+
     close(socketFD);
     pthread_exit(NULL);
     return NULL;
@@ -58,19 +59,18 @@ int main() {
         return 1;
     }
 
-    cout << "connection was successful" << endl;
+    cout << "Connection was successful" << endl;
 
     char name[256];
     cout << "Please enter your name: ";
     cin.getline(name, sizeof(name));
-
     send(socketFD, name, strlen(name), 0);
 
     char* line = NULL;
     size_t lineSize = 0;
-    char buffer[2048];  // Increased buffer size
+    char buffer[2048];
 
-    cout << "Type and we will send (type 'exit' to quit)..." << endl;
+    cout << "Type and we will send (type 'exit' to quit, '/pm <recipient> <message>' to send a private message)..." << endl;
     startListeningAndPrintMessagesOnNewThread(socketFD);
 
     while (true) {
@@ -84,19 +84,24 @@ int main() {
                 if (bytesReceived > 0) {
                     buffer[bytesReceived] = '\0';
                     cout << buffer << endl;
-                    cout.flush();  // Flush output stream
+                    cout.flush();
                 }
             }
         } else if (strlen(line) > 0) {
-            sprintf(buffer, "%s : %s", name, line);
+            if (strncmp(line, "/pm ", 4) == 0) { 
+                sprintf(buffer, "%s", line);
+            } else {
+                sprintf(buffer, "%s : %s", name, line);
+            }
+
             if (strcmp(line, "exit") == 0)
                 break;
+
             ssize_t amountWasSent = send(socketFD, buffer, strlen(buffer), 0);
         }
     }
 
     close(socketFD);
     free(line);
-
     return 0;
 }
